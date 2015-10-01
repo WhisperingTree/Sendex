@@ -56,7 +56,6 @@ require_once 'celebration.class.php';
 
 			//	запись его в массив
 			$celebrationList[] = $parsedCelebration;
-
 		}
 	}
 	$mysqli->close();
@@ -64,7 +63,8 @@ require_once 'celebration.class.php';
 	$listLength = count($celebrationList);
 
 //	ЦИКЛ СРАВНЕНИЙ ГЕТЕРОВ ИЗ ЗАДАННОЙ ДАТЫ С ЭЛЕМЕНТАМИ МАССИВА 'celebrationList'
-	for ($count=0; $count<$listLength; $count++){
+	//for ($count=0; $count<$listLength; $count++){
+	foreach ($celebrationList as &$processingCeleb){
 
 		$processingCeleb = $celebrationList[$count];
 
@@ -84,7 +84,6 @@ require_once 'celebration.class.php';
 				$isCelebration = TRUE;
 				break;
 			}
-			//	Иначе - перейти к след итерации цикла (continue).
 			else continue;
 		}
 
@@ -123,10 +122,8 @@ require_once 'celebration.class.php';
 		//	Не совпали одновременно день недели и месяц - перейти к след итерации цикла (continue).
 		else continue;
 	}
-	/*Цикл отработал, прошло сравнение рассматриваемой даты со всем массивом celebrationList, а значит - со всеми праздниками, занесёнными в БД.
-	Так как мы добрались до этой строки, не вернув ИСТИНУ в строках выше (и тем самым не выйдя из функции ретурном), то очевидно, что рассматриваемая дата - не явл праздником.
-
-	Возвращаем FALSE (не является праздником)/**/
+	//Цикл отработал, прошло сравнение рассматриваемой даты со всем массивом celebrationList, а значит - со всеми праздниками, занесёнными в БД.
+	//Так как мы добрались до этой строки, не вернув ИСТИНУ в строках выше (и тем самым не выйдя из функции ретурном), то очевидно, что рассматриваемая дата - не явл праздником.
 	//return FALSE;
 	return $isCelebration;
 
